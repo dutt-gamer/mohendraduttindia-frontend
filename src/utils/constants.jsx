@@ -1,0 +1,1 @@
+export const HAMBURGER_ICON = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/1200px-Hamburger_icon.svg.png"

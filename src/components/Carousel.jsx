@@ -36,7 +36,6 @@ const Carousel = () => {
       {...handlers}
       className="w-full h-full overflow-hidden relative bg-gray-900"
     >
-      {/* Slide container */}
       <div
         className="flex h-full transition-transform duration-500 ease-in-out"
         style={{
@@ -49,14 +48,20 @@ const Carousel = () => {
             className="w-full flex-shrink-0 flex justify-center items-center"
           >
             {i === 0 ? (
-              <Link to="/about">
+              <div className="relative w-full h-full flex justify-center items-center">
                 <img
                   src={img}
                   alt={`Slide ${i + 1}`}
-                  className="w-[90vw] max-h-[90vh] object-contain cursor-pointer"
+                  className="w-[90vw] max-h-[90vh] object-contain"
                   draggable={false}
                 />
-              </Link>
+                <Link
+                  to="/about"
+                  className="absolute bottom-10 bg-black/70 text-white px-4 py-2 rounded-md hover:bg-black/90 transition"
+                >
+                  Learn More
+                </Link>
+              </div>
             ) : (
               <img
                 src={img}
@@ -69,7 +74,6 @@ const Carousel = () => {
         ))}
       </div>
 
-      {/* Arrows */}
       <button
         onClick={goToPrevious}
         className="absolute top-1/2 left-4 -translate-y-1/2 hover:bg-gray-600/60 transition-colors ease-out text-gray-400 p-1 md:p-3 rounded-full z-10"
@@ -83,13 +87,12 @@ const Carousel = () => {
         &#8594;
       </button>
 
-      {/* Dots */}
       <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-2 z-10">
         {images.map((_, i) => (
           <button
             key={i}
             onClick={() => goToSlide(i)}
-            className={`w-2 h-2 md:w-3 md:h-3 rounded-full hover:bg-gray-400 opacity-60 transition-colors ease-in duration-100 ${
+            className={`w-2 h-2 md:w-3 md:h-3 rounded-full hover:bg-gray-400 opacity-60 transition-colors ease-in duration-100 cursor-pointer ${
               currentIndex === i ? "bg-black" : "bg-gray-300"
             }`}
           />

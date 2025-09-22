@@ -46,9 +46,9 @@ const AboutUs = () => {
             significant turning point in our legacy.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center gap-4">
+          <div className="flex flex-col sm:flex-row items-center gap-2">
             <img
-              className="w-[40vw] sm:w-40 rounded-lg"
+              className="w-[40vw] sm:w-30 rounded-lg"
               src={Apurba}
               alt="Shri Apurba Kumar Dutt"
             />

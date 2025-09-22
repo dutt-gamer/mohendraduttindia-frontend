@@ -1,6 +1,13 @@
 import React from "react";
-import { FaFacebook, FaInstagram } from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
+import {
+  FaFacebook,
+  FaInstagram,
+  FaWhatsapp,
+  FaPhoneAlt,
+  FaEnvelope,
+  FaClock,
+} from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6"
 
 const Contact = () => {
   return (
@@ -8,9 +15,7 @@ const Contact = () => {
       <h1 className="text-3xl font-bold mb-10 text-center">Contact Us</h1>
 
       <div className="flex flex-col lg:flex-row gap-8">
-        {/* Left Column - Addresses */}
-        <div className="lg:w-1/2 space-y-8">
-          {/* Registered Address */}
+        <div className="lg:w-1/2 space-y-12">
           <section>
             <h2 className="text-xl font-bold mb-2 border-b border-gray-300 pb-1">
               Registered Address
@@ -38,7 +43,6 @@ const Contact = () => {
             </p>
           </section>
 
-          {/* Retail Showrooms */}
           <section>
             <h2 className="text-xl font-semibold mb-2 border-b border-gray-300 pb-1">
               Retail Showrooms
@@ -58,9 +62,52 @@ const Contact = () => {
             </ul>
           </section>
 
-          {/* Social Handles */}
+          <section className="bg-white rounded-lg shadow-lg p-6">
+            <h2 className="text-2xl font-semibold mb-4">Business Hours</h2>
+            <div className="space-y-2 text-gray-700">
+              <p className="flex items-center gap-2">
+                <FaClock className="text-blue-600" />
+                Mon - Sat: 10:00 AM - 7:00 PM
+              </p>
+              <p className="flex items-center gap-2">
+                <FaClock className="text-red-600" />
+                Sunday: Closed
+              </p>
+            </div>
+
+            <h2 className="text-2xl font-semibold mt-6 mb-4">Quick Contact</h2>
+            <div className="space-y-2 text-gray-700">
+              <p className="flex items-center gap-2">
+                <FaPhoneAlt className="text-green-600" />
+                <a
+                  href="tel:+919954499015"
+                  className="hover:underline text-blue-600"
+                >
+                  +91 99544 99015
+                </a>
+              </p>
+              <p className="flex items-center gap-2">
+                <FaWhatsapp className="text-green-600" />
+                <a
+                  href="tel:+918486483683"
+                  className="hover:underline text-blue-600"
+                >
+                  +91 84864 83683
+                </a>
+              </p>
+              <p className="flex items-center gap-2">
+                <FaEnvelope className="text-yellow-600" />
+                <a
+                  href="mailto:sufaldutt@gmail.com"
+                  className="hover:underline text-blue-600"
+                >
+                  sufaldutt@gmail.com
+                </a>
+              </p>
+            </div>
+          </section>
           <section>
-            <h2 className="text-xl font-semibold mb-2 border-b border-gray-300 pb-1">
+            <h2 className="text-xl font-semibold mb-2 border-b border-gray-300 pb-2">
               Connect With Us
             </h2>
             <div className="flex gap-4 text-2xl">
@@ -92,9 +139,7 @@ const Contact = () => {
           </section>
         </div>
 
-        {/* Right Column - Google Map & Form */}
         <div className="lg:w-1/2 space-y-8">
-          {/* Google Map */}
           <div className="w-full h-[400px] rounded-lg overflow-hidden shadow-lg">
             <iframe
               title="Mohendra Dutt (India) & Co. Location"
@@ -106,7 +151,6 @@ const Contact = () => {
             ></iframe>
           </div>
 
-          {/* Contact Form */}
           <div className="bg-white rounded-lg shadow-lg p-6">
             <h2 className="text-2xl font-semibold mb-4">Send Us a Message</h2>
             <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
@@ -129,7 +173,9 @@ const Contact = () => {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-1">Message</label>
+                <label className="block text-sm font-medium mb-1">
+                  Message
+                </label>
                 <textarea
                   rows="4"
                   className="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-400"

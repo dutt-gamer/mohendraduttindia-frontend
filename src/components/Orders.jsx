@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { API_URL } from "../utils/constants";
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
@@ -6,7 +7,7 @@ const Orders = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const res = await fetch("http://localhost:1337/api/orders");
+        const res = await fetch(`${API_URL}/api/orders`);
         const data = await res.json();
         console.log("Orders API Response:", data);
 
@@ -27,14 +28,13 @@ const Orders = () => {
   }, []);
 
   return (
-    <div className="p-6 max-w-3xl mx-auto">
+    <div className="p-6 max-w-xl mx-auto">
       <h1 className="text-2xl font-bold mb-4">My Orders</h1>
 
       {orders.length === 0 ? (
         <p className="text-gray-500">No orders yet</p>
       ) : (
         orders.map((order) => {
-          // ✅ Handle both cases (with or without attributes)
           const details = order;
 
           return (

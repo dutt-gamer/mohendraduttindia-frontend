@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../utils/cartSlice";
+import { API_URL } from "../utils/constants";
 
 const ProductCard = ({ product }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -13,6 +14,17 @@ const ProductCard = ({ product }) => {
     dispatch(addToCart(product));
   };
 
+  // Helper to get correct image URL
+  const getImageUrl = (url) => {
+    if (!url) return "/placeholder.png"; // fallback if no image
+    return url.startsWith("https") ? url : `${API_URL}${url}`;
+  };
+
+  const currentImageUrl =
+    product.images && product.images.length > 0
+      ? getImageUrl(product.images[currentIndex]?.url)
+      : "/placeholder.png";
+
   return (
     <div className="flex flex-col items-center my-1 sm:m-1 sm:p-4 rounded-md w-full sm:w-64 sm:h-[27rem] hover:scale-103 transition-all">
       <Link
@@ -23,14 +35,14 @@ const ProductCard = ({ product }) => {
         <div className="relative w-52 h-60 flex items-center justify-center">
           <img
             className="max-w-full max-h-full object-cover sm:rounded-md"
-            src={`http://localhost:1337${product.images[currentIndex].url}`}
+            src={currentImageUrl}
             alt={product.name}
           />
         </div>
 
         {/* Image selector */}
         <div className="hidden sm:flex space-x-2 mt-2 relative z-20">
-          {product.images.map((_, index) => (
+          {product.images?.map((_, index) => (
             <button
               key={index}
               type="button"
@@ -46,6 +58,7 @@ const ProductCard = ({ product }) => {
             />
           ))}
         </div>
+
         <div className="flex flex-col items-center justify-end">
           <h1 className="w-52 font-semibold text-gray-500 text-sm sm:text-md text-center mt-3 line-clamp-2">
             {product.name}

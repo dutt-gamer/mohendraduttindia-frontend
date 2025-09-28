@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import ProductCard from "./ProductCard";
 import { setProducts } from "../utils/productSlice";
+import { API_URL } from "../utils/constants";
 
 const ProductPage = () => {
   const dispatch = useDispatch();
@@ -13,7 +14,7 @@ const ProductPage = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const data = await fetch("http://localhost:1337/api/products?populate=*");
+        const data = await fetch(`${API_URL}/api/products?populate=*`);
         const json = await data.json();
         dispatch(setProducts(json.data)); // store globally
         setFilteredProducts(json.data); // local filtered state
@@ -40,7 +41,8 @@ const ProductPage = () => {
 
     let sortedProducts = [...filteredProducts];
     if (order === "lowToHigh") sortedProducts.sort((a, b) => a.price - b.price);
-    else if (order === "highToLow") sortedProducts.sort((a, b) => b.price - a.price);
+    else if (order === "highToLow")
+      sortedProducts.sort((a, b) => b.price - a.price);
 
     setFilteredProducts(sortedProducts);
   };
@@ -58,12 +60,15 @@ const ProductPage = () => {
         >
           <input
             type="text"
-            className="w-50 text-sm md:text-md md:w-80 m-2 p-2 bg-white rounded-md" 
+            className="w-50 text-sm md:text-md md:w-80 m-2 p-2 bg-white rounded-md"
             value={searchText}
             placeholder="Search Products..."
             onChange={(e) => setSearchText(e.target.value)}
           />
-          <button type="submit" className="bg-gray-300/80 hover:bg-gray-300 transition-colors text-sm md:text-md text-gray-800 m-2 p-2 rounded-md cursor-pointer">
+          <button
+            type="submit"
+            className="bg-gray-300/80 hover:bg-gray-300 transition-colors text-sm md:text-md text-gray-800 m-2 p-2 rounded-md cursor-pointer"
+          >
             Search
           </button>
           <div className="flex justify-center my-2 text-sm md:text-md">
@@ -72,9 +77,15 @@ const ProductPage = () => {
               onChange={(e) => handleSort(e.target.value)}
               className="p-2 rounded-md text-gray-800 bg-gray-300/80 hover:bg-gray-300 transition-colors cursor-pointer"
             >
-              <option className="cursor-pointer" value="">Filter price</option>
-              <option className="cursor-pointer" value="lowToHigh">Low to High</option>
-              <option className="cursor-pointer" value="highToLow">High to Low</option>
+              <option className="cursor-pointer" value="">
+                Filter price
+              </option>
+              <option className="cursor-pointer" value="lowToHigh">
+                Low to High
+              </option>
+              <option className="cursor-pointer" value="highToLow">
+                High to Low
+              </option>
             </select>
           </div>
         </form>

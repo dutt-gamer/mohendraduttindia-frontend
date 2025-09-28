@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setUser } from "../utils/authSlice";
+import { API_URL } from "../utils/constants";
 
 const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(false);
@@ -21,7 +22,7 @@ const AuthPage = () => {
 
     try {
       // Try register
-      const res = await fetch("http://localhost:1337/api/auth/local/register", {
+      const res = await fetch(`${API_URL}/api/auth/local/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -40,7 +41,7 @@ const AuthPage = () => {
         setMessage(`✅ Registered successfully! Welcome ${data.user.username}`);
       } else {
         // Ignore duplicate, login instead
-        const loginRes = await fetch("http://localhost:1337/api/auth/local", {
+        const loginRes = await fetch(`${API_URL}/api/auth/local`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ identifier: formData.email, password: formData.password }),

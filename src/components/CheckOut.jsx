@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { clearCart } from "../utils/cartSlice"; // ✅ import your clearCart action
+import { API_URL } from "../utils/constants";
 
 const Checkout = () => {
   const cartItems = useSelector((state) => state.cart.items);
@@ -31,7 +32,7 @@ const Checkout = () => {
   const handlePayment = async () => {
     try {
       // Create Razorpay order from backend
-      const res = await fetch("http://localhost:1337/api/payment/order", {
+      const res = await fetch(`${API_URL}/api/payment/order`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -59,7 +60,7 @@ const Checkout = () => {
 
           try {
             // ✅ Save order in Strapi
-            const saveRes = await fetch("http://localhost:1337/api/orders", {
+            const saveRes = await fetch(`${API_URL}/api/orders`, {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({

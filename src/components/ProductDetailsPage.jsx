@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../utils/cartSlice";
 import ProductCard from "./ProductCard";
 import { addRecentlyViewed } from "../utils/productSlice";
+import { API_URL } from "../utils/constants";
 
 const ProductDetailsPage = () => {
   const recentlyViewed = useSelector((store) => store.products.recentlyViewed);
@@ -14,6 +15,11 @@ const ProductDetailsPage = () => {
   const [product, setProduct] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
 
+  const getImageUrl = (url) => {
+    if (!url) return "";
+    return url.startsWith("https") ? url : `${API_URL}${url}`;
+  };
+
   useEffect(() => {
     if (product) {
       dispatch(addRecentlyViewed(product));
@@ -22,9 +28,7 @@ const ProductDetailsPage = () => {
 
   useEffect(() => {
     const fetchProduct = async () => {
-      const data = await fetch(
-        `http://localhost:1337/api/products/${id}?populate=*`
-      );
+      const data = await fetch(`${API_URL}/api/products/${id}?populate=*`);
       const json = await data.json();
       const fetchedProduct = json.data;
       setProduct(fetchedProduct);
@@ -64,7 +68,7 @@ const ProductDetailsPage = () => {
         <div className="flex flex-col items-center w-full md:w-1/2">
           <div className="w-[28rem] h-[28rem] flex items-center justify-center rounded-lg bg-gray-200">
             <img
-              src={`http://localhost:1337${selectedImage}`}
+              src={getImageUrl(selectedImage)}
               alt={product.name}
               className="max-w-full max-h-full object-contain"
             />
@@ -74,7 +78,7 @@ const ProductDetailsPage = () => {
             {product.images.map((img, index) => (
               <img
                 key={index}
-                src={`http://localhost:1337${img.url}`}
+                src={getImageUrl(img.url)}
                 alt={`thumb-${index}`}
                 className={`w-20 h-20 object-contain rounded-md cursor-pointer ${
                   selectedImage === img.url

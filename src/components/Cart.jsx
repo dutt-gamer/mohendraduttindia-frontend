@@ -8,6 +8,7 @@ import {
   clearCart,
   decreaseQuantity,
 } from "../utils/cartSlice";
+import { API_URL } from "../utils/constants";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -31,7 +32,7 @@ const Cart = () => {
   };
 
   return (
-    <div className="p-4 min-h-screen bg-gray-100">
+    <div className="p-4 bg-gray-100">
       <h1 className="text-2xl font-bold mb-4">Your Cart</h1>
 
       {cartItems.length === 0 ? (
@@ -68,14 +69,18 @@ const Cart = () => {
                 {/* Product */}
                 <div className="flex items-center gap-3 w-full md:w-2/4">
                   <img
-                    src={`http://localhost:1337${product?.images[0]?.url}`}
+                    src={product?.images?.[0]?.url || "/placeholder.png"}
                     alt={item.name}
                     className="w-20 h-20 object-contain rounded-md"
                   />
                   <div>
                     <h2 className="font-semibold">{item.name}</h2>
-                    <p className="text-sm text-gray-600">Price: ₹{item.price}</p>
-                    <p className="text-sm text-gray-500">Available: {maxQuantity}</p>
+                    <p className="text-sm text-gray-600">
+                      Price: ₹{item.price}
+                    </p>
+                    <p className="text-sm text-gray-500">
+                      Available: {maxQuantity}
+                    </p>
                   </div>
                 </div>
 
@@ -106,7 +111,9 @@ const Cart = () => {
                 {/* Subtotal */}
                 <div className="flex justify-between items-center mt-3 md:mt-0 md:w-1/4 md:justify-end">
                   <span className="block md:hidden font-medium">Subtotal:</span>
-                  <span className="font-semibold">₹{item.price * item.quantity}</span>
+                  <span className="font-semibold">
+                    ₹{item.price * item.quantity}
+                  </span>
                 </div>
 
                 {/* Remove Button */}

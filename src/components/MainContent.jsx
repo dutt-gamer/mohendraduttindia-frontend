@@ -12,7 +12,7 @@ import Orders from "./Orders";
 
 const MainContent = () => {
   return (
-    <div>
+    <div className="relative">
       <Routes>
         <Route
           path="/"

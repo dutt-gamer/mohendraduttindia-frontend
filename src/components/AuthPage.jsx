@@ -63,7 +63,7 @@ const AuthPage = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
-      <div className="bg-white shadow-md rounded-lg w-full max-w-md p-6">
+      <div className="bg-white shadow-md rounded-lg w-full max-w-md p-6 md:mt-20">
         <h2 className="text-2xl font-bold mb-6 text-center">
           {isLogin ? "Login" : "Register / Auto Login"}
         </h2>

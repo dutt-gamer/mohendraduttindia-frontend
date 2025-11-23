@@ -48,9 +48,9 @@ const ProductPage = () => {
   };
 
   return (
-    <div className="relative bg-gray-900 min-h-screen">
+    <div className="relative bg-gray-900 min-h-screen p-4">
       {/* Search + Sort */}
-      <span className="sticky flex w-full md:w-[45%] mx-auto rounded-sm justify-center top-0 z-30">
+      <div className="sticky top-0 scale-90 md:scale-100 md:top-14 xl:fixed xl:top-2 left-80 z-30 flex justify-center py-2">
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -65,34 +65,33 @@ const ProductPage = () => {
             placeholder="Search Products..."
             onChange={(e) => setSearchText(e.target.value)}
           />
-          <button
-            type="submit"
-            className="bg-gray-300/80 hover:bg-gray-300 transition-colors text-sm md:text-md text-gray-800 m-2 p-2 rounded-md cursor-pointer"
-          >
-            Search
-          </button>
-          <div className="flex justify-center my-2 text-sm md:text-md">
-            <select
-              value={sortOrder}
-              onChange={(e) => handleSort(e.target.value)}
-              className="p-2 rounded-md text-gray-800 bg-gray-300/80 hover:bg-gray-300 transition-colors cursor-pointer"
-            >
-              <option className="cursor-pointer" value="">
-                Filter price
-              </option>
-              <option className="cursor-pointer" value="lowToHigh">
-                Low to High
-              </option>
-              <option className="cursor-pointer" value="highToLow">
-                High to Low
-              </option>
-            </select>
-          </div>
+          <span className="flex">
+            <button className="bg-gray-300/80 hover:bg-gray-300 transition-colors text-sm md:text-md text-gray-800 m-2 p-2 rounded-md cursor-pointer">
+              Search
+            </button>
+            <div className="flex justify-center my-2 text-sm md:text-md">
+              <select
+                value={sortOrder}
+                onChange={(e) => handleSort(e.target.value)}
+                className="p-2 rounded-md text-gray-800 bg-gray-300/80 hover:bg-gray-300 transition-colors cursor-pointer"
+              >
+                <option className="cursor-pointer" value="">
+                  Filter price
+                </option>
+                <option className="cursor-pointer" value="lowToHigh">
+                  Low to High
+                </option>
+                <option className="cursor-pointer" value="highToLow">
+                  High to Low
+                </option>
+              </select>
+            </div>
+          </span>
         </form>
-      </span>
+      </div>
 
       {/* Products */}
-      <div className="flex flex-wrap justify-center items-center">
+      <div className="flex flex-wrap justify-evenly md:px-9 items-center">
         {filteredProducts.length > 0 ? (
           filteredProducts.map((product) => (
             <ProductCard key={product.id} product={product} />

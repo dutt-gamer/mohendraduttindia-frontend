@@ -32,8 +32,8 @@ const Cart = () => {
   };
 
   return (
-    <div className="p-4 bg-gray-100">
-      <h1 className="text-2xl font-bold mb-4">Your Cart</h1>
+    <div className="md:px-28 p-4 bg-gray-100">
+      <h1 className="text-2xl font-bold mb-4 md:mt-24">Your Cart</h1>
 
       {cartItems.length === 0 ? (
         <p>Your cart is empty</p>

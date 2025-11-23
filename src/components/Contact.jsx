@@ -12,7 +12,7 @@ import { FaXTwitter } from "react-icons/fa6"
 const Contact = () => {
   return (
     <div className="mx-auto px-6 sm:px-10 lg:px-20 py-10 bg-gray-50">
-      <h1 className="text-3xl font-bold mb-10 text-center">Contact Us</h1>
+      <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-10 text-center md:mt-20">Contact Us</h1>
 
       <div className="flex flex-col lg:flex-row gap-8">
         <div className="lg:w-1/2 space-y-12">

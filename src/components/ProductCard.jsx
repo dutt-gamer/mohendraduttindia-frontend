@@ -26,7 +26,7 @@ const ProductCard = ({ product }) => {
       : "/placeholder.png";
 
   return (
-    <div className="flex flex-col items-center my-1 sm:m-1 sm:p-4 rounded-md w-full sm:w-64 sm:h-[27rem] hover:scale-103 transition-all">
+    <div className="flex flex-col items-center my-1 sm:m-1 sm:p-4 rounded-md w-full sm:w-64 sm:h-[27rem] hover:bg-white hover:scale-102 transition-all">
       <Link
         to={"/product/" + product.documentId}
         key={product.id}
@@ -34,7 +34,7 @@ const ProductCard = ({ product }) => {
       >
         <div className="relative w-52 h-60 flex items-center justify-center">
           <img
-            className="max-w-full max-h-full object-cover sm:rounded-md"
+            className="max-w-full max-h-full object-cover rounded-md"
             src={currentImageUrl}
             alt={product.name}
           />
@@ -71,7 +71,7 @@ const ProductCard = ({ product }) => {
           </p>
           <button
             onClick={handleAddToCart}
-            className="mt-3 sm:hidden bg-blue-600 text-white px-4 py-1 rounded-md hover:bg-blue-700 transition-colors cursor-pointer"
+            className="mt-3 sm:hidden bg-indigo-800 text-white px-4 py-1 rounded-md hover:bg-indigo-500 transition-colors cursor-pointer"
           >
             Add to Cart
           </button>
@@ -81,7 +81,7 @@ const ProductCard = ({ product }) => {
       {/* Add to Cart Button */}
       <button
         onClick={handleAddToCart}
-        className="mt-3 bg-blue-600 hidden sm:block text-white px-4 py-1 rounded-md hover:bg-blue-700 transition-colors cursor-pointer"
+        className="mt-3 bg-indigo-800 hidden sm:block text-white px-4 py-1 rounded-md hover:bg-indigo-500 transition-colors cursor-pointer"
       >
         Add to Cart
       </button>

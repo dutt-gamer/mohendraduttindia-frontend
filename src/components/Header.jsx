@@ -3,101 +3,157 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../utils/authSlice";
 import MdLogo from "../assets/MdLogo.png";
+import HomeIcon from "../assets/Home.png";
+import UserIcon from "../assets/user.png";
 import { HAMBURGER_ICON } from "../utils/constants";
 
 const Header = () => {
   const [showNav, setShowNav] = useState(false);
-  const { user } = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const [showUserMenu, setShowUserMenu] = useState(false);
 
+  const { user } = useSelector((state) => state.auth);
   const cartItems = useSelector((state) => state.cart.items);
   const totalQuantity = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const toggleNav = () => setShowNav((prev) => !prev);
+  const closeNav = () => setShowNav(false);
 
   const handleLogout = () => {
     dispatch(logout());
     navigate("/login");
+    setShowUserMenu(false);
   };
 
   return (
-    <header className="bg-gray-900 md:flex md:justify-between md:items-center p-2">
+    <header className="bg-gray-900 md:fixed w-full z-30 md:flex md:justify-between md:items-center md:px-28 md:py-3 p-2">
       {/* Logo + Mobile Menu Button */}
       <div className="flex justify-between items-center">
         <button
-          className={`md:hidden p-2 w-8 cursor-pointer transition-transform duration-300 ${
-            showNav ? "rotate-90" : "rotate-0"
+          className={`md:hidden px-2 w-8 cursor-pointer duration-400 ease-out ${
+            showNav ? "rotate-180" : "rotate-0"
           }`}
           onClick={toggleNav}
           aria-label="Toggle Navigation"
+          aria-expanded={showNav}
         >
-          <img className="w-6 filter invert" src={HAMBURGER_ICON} alt="menu" />
+          {showNav ? (
+            <span
+              style={{ fontFamily: "Arial" }}
+              className="text-white font-medium text-md"
+            >
+              X
+            </span>
+          ) : (
+            <img
+              className="w-6 filter invert"
+              src={HAMBURGER_ICON}
+              alt="menu"
+            />
+          )}
         </button>
-        <span>
-          <Link to="/">
-            <img className="w-36 md:w-48 m-1" src={MdLogo} alt="logo" />
-          </Link>
-        </span>
+        <Link to="/" onClick={closeNav}>
+          <img className="w-36 md:w-48 m-1" src={MdLogo} alt="logo" />
+        </Link>
       </div>
 
       {/* Navigation Links */}
       <ul
         className={`${
           showNav ? "flex" : "hidden"
-        } flex-col md:flex md:flex-row items-center justify-center md:justify-end gap-2 md:gap-4 mt-2 md:mt-0`}
+        } flex-col md:flex md:flex-row items-center justify-center md:justify-end gap-3 mt-2 md:mt-0`}
       >
-        <Link to="/">
-          <li className="text-sm md:text-md text-white cursor-pointer hover:scale-110 transition-transform">
-            Home
-          </li>
-        </Link>
-        <Link to="/about">
-          <li className="text-sm md:text-md text-white cursor-pointer hover:scale-110 transition-transform">
+        <li>
+          <Link
+            to="/"
+            onClick={closeNav}
+            className="text-sm md:text-md text-white cursor-pointer hover:scale-130 transition-transform flex items-center gap-1"
+          >
+            <img className="w-4 filter invert" src={HomeIcon} alt="home" />
+          </Link>
+        </li>
+
+        <li>
+          <Link
+            to="/about"
+            onClick={closeNav}
+            className="block text-sm md:text-md text-white cursor-pointer hover:scale-110 transition-transform"
+          >
             About Us
-          </li>
-        </Link>
-        <Link to="/contact">
-          <li className="text-sm md:text-md text-white cursor-pointer hover:scale-110 transition-transform">
+          </Link>
+        </li>
+
+        <li>
+          <Link
+            to="/contact"
+            onClick={closeNav}
+            className="block text-sm md:text-md text-white cursor-pointer hover:scale-110 transition-transform"
+          >
             Contact Us
-          </li>
-        </Link>
+          </Link>
+        </li>
 
         {user ? (
-          <>
-            <Link to="/orders">
-              <li className="text-sm md:text-md text-white cursor-pointer hover:scale-110 transition-transform">
-                My Orders
-              </li>
-            </Link>
-            <li className="text-sm md:text-md text-white px-2">
-              Welcome, {user.username}!
-            </li>
-            <li
-              onClick={handleLogout}
-              className="text-sm md:text-md text-white cursor-pointer hover:scale-110 transition-transform"
+          <li className="relative">
+            <button
+              onClick={() => setShowUserMenu((prev) => !prev)}
+              className="text-sm md:text-md text-white cursor-pointer hover:scale-130 transition-transform"
             >
-              Logout
-            </li>
-          </>
+              <img className="w-3.5 h-3.5 invert" src={UserIcon} alt="home" />
+            </button>
+
+            {showUserMenu && (
+              <div className="absolute right-0 mt-2 bg-gray-800 rounded-lg shadow-lg py-2 w-32 z-10">
+                <div className="block text-white text-sm px-4 py-2">
+                  {user.username}
+                </div>
+                <Link
+                  to="/orders"
+                  onClick={() => {
+                    closeNav();
+                    setShowUserMenu(false);
+                  }}
+                  className="block text-white text-sm px-4 py-2 hover:bg-gray-700"
+                >
+                  My Orders
+                </Link>
+                <button
+                  onClick={handleLogout}
+                  className="block text-white text-sm px-4 py-2 hover:bg-gray-700 w-full text-left"
+                >
+                  Logout
+                </button>
+              </div>
+            )}
+          </li>
         ) : (
-          <Link to="/login">
-            <li className="text-sm md:text-md text-white cursor-pointer hover:scale-110 transition-transform">
+          <li>
+            <Link
+              to="/login"
+              onClick={closeNav}
+              className="block text-sm md:text-md text-white cursor-pointer hover:scale-110 transition-transform"
+            >
               Login
-            </li>
-          </Link>
+            </Link>
+          </li>
         )}
 
-        <Link to="/cart">
-          <li className="relative text-sm md:text-md text-white cursor-pointer hover:scale-150 transition-transform scale-125 flex items-center">
+        <li className="relative">
+          <Link
+            to="/cart"
+            onClick={closeNav}
+            className="relative text-sm md:text-md text-white cursor-pointer hover:scale-150 transition-transform scale-125 flex items-center"
+          >
             🛒
             {totalQuantity > 0 && (
-              <span className="absolute -top-0 -right-0 bg-red-600 text-white text-xs w-3 h-3 flex items-center justify-center rounded-full">
+              <span className="absolute -top-1 -right-2 bg-red-600 text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full">
                 {totalQuantity}
               </span>
             )}
-          </li>
-        </Link>
+          </Link>
+        </li>
       </ul>
     </header>
   );

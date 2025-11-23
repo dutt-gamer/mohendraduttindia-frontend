@@ -5,17 +5,17 @@ import bgUmb from "../assets/bg-umb.jpg";
 const AboutUs = () => {
   return (
     <section
-      className="bg-cover bg-center bg-no-repeat py-20 px-4 sm:px-6 lg:px-8"
+      className="bg-cover bg-center bg-fixed bg-no-repeat py-5 md:py-20 px-4 sm:px-6 lg:px-8"
       style={{
         backgroundImage: `url(${bgUmb})`,
       }}
     >
-      <div className="max-w-4xl mx-auto text-gray-600">
+      <div className="max-w-4xl mx-auto text-gray-600 md:mt-10">
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center text-cyan-900 mb-12">
           Our Legacy
         </h1>
 
-        <div className="space-y-6 text-base sm:text-lg leading-relaxed bg-white/65 p-6 sm:p-10 rounded-lg shadow-xl">
+        <div className="space-y-6 text-base sm:text-lg leading-relaxed bg-white/70 p-6 sm:p-10 rounded-lg shadow-xl">
           <p>
             At <span className="font-semibold"> Mohendra Dutt India</span>, we
             don’t just make umbrellas — we carry forward a story that began

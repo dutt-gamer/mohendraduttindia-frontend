@@ -13,7 +13,7 @@ const Carousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    const timer = setInterval(goToNext, 6000);
+    const timer = setInterval(goToNext, 100000);
     return () => clearInterval(timer);
   }, [currentIndex]);
 
@@ -37,7 +37,7 @@ const Carousel = () => {
       className="w-full h-full overflow-hidden relative bg-gray-900"
     >
       <div
-        className="flex h-full transition-transform duration-500 ease-in-out"
+        className="flex h-full transition-transform md:mt-28 duration-500 ease-in-out"
         style={{
           transform: `translateX(-${currentIndex * 100}%)`,
         }}
@@ -57,7 +57,7 @@ const Carousel = () => {
                 />
                 <Link
                   to="/about"
-                  className="absolute bottom-10 bg-black/70 text-white px-4 py-2 rounded-md hover:bg-black/90 transition"
+                  className="absolute bottom-8 text-sm sm:text-lg sm:bottom-10 bg-black/60 text-white px-2 py-1 sm:px-4 sm:py-2 rounded-md hover:bg-black/80 transition"
                 >
                   Learn More
                 </Link>

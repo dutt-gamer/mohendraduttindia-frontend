@@ -13,7 +13,7 @@ const Carousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    const timer = setInterval(goToNext, 100000);
+    const timer = setInterval(goToNext, 6000);
     return () => clearInterval(timer);
   }, [currentIndex]);
 
